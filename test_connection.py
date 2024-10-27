@@ -2,7 +2,7 @@ import pyodbc
 
 # Configuración de la conexión
 server = 'localhost'  # o dirección IP del servidor si está en otra máquina
-database = 'master'   # base de datos predeterminada
+database = 'EasyEnroll'   # base de datos predeterminada
 username = 'sa'       # usuario SA (o el que hayas creado)
 password = 'zS22004347'  # contraseña del usuario
 

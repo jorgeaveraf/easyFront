@@ -1,8 +1,12 @@
+// Variables globales para almacenar las URLs de las imágenes subidas
+let scanINEUrl = null;
+let scanComprobanteDomicilioUrl = "https://firebasestorage.googleapis.com/v0/b/flutter-imgtxt.appspot.com/o/imagenes%2Fcomprobante-domicilio.jpg?alt=media&token=3b3b3b3b-3b3b-3b3b-3b3b-3b3b3b3b3b3b";
+
 // Importa lo necesario desde Firebase (sin importar archivos manualmente)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
 
-// Tu configuración de Firebase
+// Configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAjqpqfAGRXVWk28cBkYFEujUQWsNOBnmQ",
   authDomain: "flutter-imgtxt.firebaseapp.com",
@@ -43,6 +47,15 @@ function mostrarVistaPrevia() {
     }
 }
 
+// Función para habilitar los campos del formulario
+function habilitarCampos() {
+    document.getElementById('nombre').disabled = false;
+    document.getElementById('curp').disabled = false;
+    document.getElementById('correo').disabled = false;
+    document.getElementById('telefono').disabled = false;
+}
+
+
 // Función analizarINE modificada para ocultar la vista previa después de confirmar carga
 async function analizarINE(imageUrl) {
     try {
@@ -65,6 +78,13 @@ async function analizarINE(imageUrl) {
 
             // Ocultar la vista previa después de confirmar la carga
             document.getElementById('vistaPreviaContainer').style.display = 'none';
+
+            // Guarda la URL del INE en la variable global
+            scanINEUrl = imageUrl;
+
+            // Habilita los campos del formulario
+            habilitarCampos();
+            
         } else {
             console.error("Error en el análisis:", data);
             alert("Hubo un error en el análisis.");
@@ -114,7 +134,48 @@ function subirImagen(file) {
     });
 }
 
+// Función para registrar al tutor
+async function registrarTutor() {
+    const nombre = document.getElementById('nombre').value;
+    const curp = document.getElementById('curp').value;
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('correo').value;
 
+    // Asegúrate de que `scanINEUrl` ya tiene la URL después de subir la imagen
+    const padreTutor = {
+        Nombre: nombre,
+        CURP: curp,
+        ScanINE: scanINEUrl, // Usa la URL de la imagen cargada
+        Telefono: telefono,
+        Email: email,
+        ScanComprobanteDomicilio: scanComprobanteDomicilioUrl // Agrega esto si tienes un segundo comprobante
+    };
+
+    try {
+        const response = await fetch('http://localhost:5088/api/INE/registrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(padreTutor)
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert("Registro exitoso");
+        } else {
+            alert("Error en el registro: " + result.message);
+        }
+    } catch (error) {
+        console.error("Error al registrar el tutor:", error);
+        alert("Error en el registro");
+    }
+}
+
+// Llama a esta función cuando el usuario haga clic en el botón "Registrar"
+document.querySelector('button[type="submit"]').addEventListener('click', (event) => {
+    event.preventDefault(); // Evita el envío del formulario
+    registrarTutor(); // Llama a la función de registro
+});
 
 // Evento para el botón "Confirmar Carga"
 document.getElementById('btnSubirImagen').addEventListener('click', () => {
