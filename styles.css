@@ -1,0 +1,50 @@
+/* Overlay para oscurecer el fondo */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Asegura que esté por encima del contenido */
+}
+
+/* Loader CSS */
+.loader {    
+    --r1: 154%;
+    --r2: 68.5%;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%; 
+    background:
+        radial-gradient(var(--r1) var(--r2) at top   ,#0000 79.5%,#269af2 80%),
+        radial-gradient(var(--r1) var(--r2) at bottom,#269af2 79.5%,#0000 80%),
+        radial-gradient(var(--r1) var(--r2) at top   ,#0000 79.5%,#269af2 80%),
+        #ccc;
+    background-size: 50.5% 220%;
+    background-position: -100% 0%,0% 0%,100% 0%;
+    background-repeat: no-repeat;
+    animation: l9 2s infinite linear;
+    position: relative;
+}
+
+/* Estilo del texto del porcentaje en el centro del loader */
+.loader-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Keyframes para la animación del loader */
+@keyframes l9 {
+    33%  {background-position:    0% 33% ,100% 33% ,200% 33% }
+    66%  {background-position: -100%  66%,0%   66% ,100% 66% }
+    100% {background-position:    0% 100%,100% 100%,200% 100%}
+}

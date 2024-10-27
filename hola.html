@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="miApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Tutor</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+
+    
+    <style>
+        body {
+            background-color: #f0f4fa;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2c3e75;
+            color: white;
+            padding: 10px;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+        }
+        .header img {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .form-column {
+            width: 48%;
+        }
+        .btn-custom {
+            background-color: #f1c40f;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            width: 15%;
+            font-size: 18px;
+        }
+        .btn-dark-custom {
+            background-color: #34495e;
+            color: white;
+        }
+        .nav-bottom {
+            background-color: #2c3e75;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .nav-bottom a {
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+        .nav-bottom i {
+            display: block;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body ng-controller="miControlador">
+
+    <div class="header">
+        <img src="Escudo.png" alt="Logo">
+        <h2>¡Bienvenido!</h2>
+    </div>
+
+    <div class="container form-container">
+        <div class="form-column">
+            <form>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" disabled>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="curp">CURP:</label>
+                    <input type="text" class="form-control" id="curp" placeholder="Ingrese la CURP" disabled>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>INE:</label>
+                    <div class="d-flex">
+                        <input type="file" id="fileInput" style="display: none;" onchange="mostrarVistaPrevia()">
+                        <button type="button" class="btn btn-dark-custom mr-2" onclick="document.getElementById('fileInput').click();">
+                            Cargar
+                        </button>
+                        <button type="button" class="btn btn-dark-custom" id="btnSubirImagen">
+                            Confirmar Carga
+                        </button>
+                    </div>
+                    <div id="vistaPreviaContainer" style="display: none; margin-top: 10px;">
+                        <img id="vistaPrevia" src="" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; border: 1px solid #ddd; padding: 5px; border-radius: 10px;">
+                    </div>
+                    <!-- Contenedor para el indicador de carga con overlay -->
+                    <div id="loaderContainer" class="overlay" style="display: none;">
+                        <div class="loader"></div>
+                        <div id="loaderText" class="loader-text">0%</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-column">
+            <form>
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="email" class="form-control" id="correo" placeholder="Ingrese el correo" disabled>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" class="form-control" id="telefono" placeholder="Ingrese el teléfono" disabled>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-custom mt-3">Registrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="nav-bottom">
+        <a href="#">
+            <i class="fas fa-user-plus"></i>
+            Inscripción
+        </a>
+        <a href="#">
+            <i class="fas fa-home"></i>
+            Inicio
+        </a>
+        <a href="#">
+            <i class="fas fa-user"></i>
+            Tutor
+        </a>
+        <a href="#">
+            <i class="fas fa-graduation-cap"></i>
+            Alumno
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        function habilitarCampos() {
+            document.getElementById('nombre').disabled = false;
+            document.getElementById('curp').disabled = false;
+            document.getElementById('correo').disabled = false;
+            document.getElementById('telefono').disabled = false;
+        }
+
+        var app = angular.module('miApp', []);
+        app.controller('miControlador', function($scope) {
+            $scope.nombre = 'Mundo';
+        });
+    </script>
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>

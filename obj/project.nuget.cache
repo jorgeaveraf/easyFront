@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "NIXTZ6DiQoU=",
+  "success": true,
+  "projectFilePath": "/home/j_dev/Documentos/uv/5/D_SW/easy/easy_front/easy.csproj",
+  "expectedPackageFiles": [
+    "/home/j_dev/.nuget/packages/microsoft.win32.systemevents/8.0.0/microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "/home/j_dev/.nuget/packages/skiasharp/2.88.8/skiasharp.2.88.8.nupkg.sha512",
+    "/home/j_dev/.nuget/packages/skiasharp.nativeassets.linux/2.88.8/skiasharp.nativeassets.linux.2.88.8.nupkg.sha512",
+    "/home/j_dev/.nuget/packages/skiasharp.nativeassets.macos/2.88.8/skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+    "/home/j_dev/.nuget/packages/skiasharp.nativeassets.win32/2.88.8/skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
+    "/home/j_dev/.nuget/packages/system.drawing.common/8.0.10/system.drawing.common.8.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}
